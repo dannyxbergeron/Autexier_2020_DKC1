@@ -18,7 +18,7 @@ rule picard_sumup:
     """ Get an simple overview of the picard statistics """
     input:
         metrics = expand("results/picard/{id}/picard_insert_size_metrics.txt",
-                            id=simple_id)
+                         id=simple_id)
     output:
         merged = "results/picard/picard_sumup.csv"
     conda:
@@ -31,7 +31,7 @@ rule star_sumup:
     """ Get an simple overview of the STAR statistics """
     input:
         log_files = expand("results/STAR/{id}/Log.final.out",
-                            id=simple_id)
+                           id=simple_id)
     output:
         merged = "results/STAR/star_sumup.csv"
     conda:
@@ -48,7 +48,7 @@ rule star_alignReads_spike_in:
     output:
         bam_spike = "results/STAR_spike_in/{id}/Aligned.sortedByCoord.out.bam"
     params:
-        index = config['path_test']['star_index_spike_in'],
+        index = config['path']['star_index_spike_in'],
         output_dir = "results/STAR_spike_in/{id}/"
     log:
         "logs/STAR_spike_in/{id}.log"

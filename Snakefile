@@ -2,33 +2,31 @@ import os
 
 configfile: "config.json"
 
-original_name = list(config['datasets_test'].values())
-simple_id = list(config['datasets_test'].keys())
+original_name = list(config['datasets'].values())
+simple_id = list(config['datasets'].keys())
 
 rule all:
     input:
+        fq1_out = expand("data/qc/{id}_1_fastqc.html",
+                         id=simple_id),
         merged = "results/coco/merged/tpm.tsv",
-        bedgraphs = expand("results/coco/bedgraphs/{id}.bedgraph",
-                        id=simple_id),
-        bw =  expand("results/coco/bigwig/{id}.bw",
-                        id=simple_id),
-        metrics = expand("results/picard/{id}/picard_insert_size_metrics.txt",
-                        id=simple_id),
+        bw = expand("results/coco/bigwig/{id}.bw",
+                    id=simple_id),
         merged_picard = "results/picard/picard_sumup.csv",
         merged_star = "results/STAR/star_sumup.csv",
         samtools_idx = expand("results/samtools_idxstats/{id}_idxstat.tsv",
-                                id=simple_id)
-                                
+                              id=simple_id)
 
-# rule download_genome:
-#     """ Downloads the genome from Ensembl FTP servers """
-#     output:
-#         genome = config['path_test']['genome']
-#     params:
-#         link = config['download']['genome']
-#     shell:
-#         "wget --quiet -O {output.genome}.gz {params.link} && "
-#         "gzip -d {output.genome}.gz "
+
+rule download_genome:
+    """ Downloads the genome from Ensembl FTP servers """
+    output:
+        genome = config['path']['genome']
+    params:
+        link = config['download']['genome']
+    shell:
+        "wget --quiet -O {output.genome}.gz {params.link} && "
+        "gzip -d {output.genome}.gz "
 
 
 rule rename_files:
@@ -40,7 +38,7 @@ rule rename_files:
         new_name = expand("data/reads/{id}_{pair}.fastq",
                           id=simple_id, pair=[1, 2])
     run:
-        for id, original in config['datasets_test'].items():
+        for id, original in config['datasets'].items():
             for num in [1, 2]:
                 old = "data/reads/{}_{}.fastq".format(original, num)
                 new_ = "data/reads/{}_{}.fastq".format(id, num)
@@ -112,12 +110,12 @@ rule qc:
 rule star_index:
     """ Generates the genome index for STAR """
     input:
-        fasta = config["path_test"]["genome"],
-        gtf = config["path_test"]['annotation']
+        fasta = config["path"]["genome"],
+        gtf = config["path"]['annotation']
     output:
-        chrNameLength = config['path_test']['chrNameLength']
+        chrNameLength = config['path']['chrNameLength']
     params:
-        dir = config['path_test']['star_index']
+        dir = config['path']['star_index']
     log:
         "logs/STAR/index.log"
     conda:
@@ -142,9 +140,10 @@ rule star_alignReads:
         fq1 = rules.trimming.output.fq1,
         fq2 = rules.trimming.output.fq2
     output:
-        bam = "results/STAR/{id}/Aligned.sortedByCoord.out.bam"
+        bam = "results/STAR/{id}/Aligned.sortedByCoord.out.bam",
+        bam_logs = "results/STAR/{id}/Log.final.out"
     params:
-        index = config['path_test']['star_index'],
+        index = config['path']['star_index'],
         output_dir = "results/STAR/{id}/"
     log:
         "logs/STAR/{id}.log"

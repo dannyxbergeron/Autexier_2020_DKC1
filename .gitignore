@@ -9,6 +9,7 @@ data/test_reads
 data/reads
 data/qc
 data/trimmed
+data/original_info
 results/
 tok/
 rules/__pycache__

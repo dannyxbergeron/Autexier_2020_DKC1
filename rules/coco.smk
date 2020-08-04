@@ -1,9 +1,9 @@
 rule create_coco_annotation:
     """ Create the CoCo corrected annotation """
     input:
-        gtf = config["path_test"]['annotation']
+        gtf = config["path"]['annotation']
     output:
-        correct_gtf = config["path_test"]['correct_annotation']
+        correct_gtf = config["path"]['correct_annotation']
     conda:
         "../envs/coco.yaml"
     shell:
@@ -13,7 +13,7 @@ rule create_coco_annotation:
 rule coco_correct_count:
     """ Generates the tpm counts using CoCo correct counts """
     input:
-        annotation = config["path_test"]['correct_annotation'],
+        annotation = config["path"]['correct_annotation'],
         bam_file = "results/STAR/{id}/Aligned.sortedByCoord.out.bam"
     output:
         out_file = "results/coco/{id}.tsv"
@@ -47,7 +47,7 @@ rule coco_correct_bedgraph:
     """ Create a bedgraph from the bam files """
     input:
         bam_file = "results/STAR/{id}/Aligned.sortedByCoord.out.bam",
-        chrLength = config['path_test']['chrNameLength']
+        chrLength = config['path']['chrNameLength']
     output:
         bedgraph = "results/coco/bedgraphs/{id}.bedgraph"
     conda:
@@ -63,10 +63,10 @@ rule keep_primary_chr:
     """ Remove the first line of each bedgraph and filter out the non-standard
         chromosomes - In preparation for the bedGraphToBigWig """
     input:
-        bedgraphs = expand("results/coco/bedgraphs/{id}.bedgraph", id= simple_id),
-        chrLength = config['path_test']['chrNameLength']
+        bedgraphs = expand("results/coco/bedgraphs/{id}.bedgraph", id=simple_id),
+        chrLength = config['path']['chrNameLength']
     output:
-        clean_bg = expand("results/coco/bedgraphs/clean_{id}.bedgraph", id= simple_id),
+        clean_bg = expand("results/coco/bedgraphs/clean_{id}.bedgraph", id=simple_id),
         new_chrLength = "data/chrNameLength_modif.txt"
     conda:
         "../envs/python.yaml"

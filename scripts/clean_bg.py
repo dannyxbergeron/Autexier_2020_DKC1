@@ -15,6 +15,9 @@ for infile, outfile in zip(input_files, output_files):
     clean_df.to_csv(outfile, sep='\t', index=False, header=False)
 
 
-chrNameLength_df = pd.read_csv(snakemake.input.chrLength, sep='\t', names=['chr', 'val'])
+chrNameLength_df = pd.read_csv(snakemake.input.chrLength, sep='\t',
+                               names=['chr', 'val'],
+                               dtype={'chr': str})
 chrNameLength_df['chr'] = 'chr' + chrNameLength_df['chr']
-chrNameLength_df.to_csv(snakemake.output.new_chrLength, sep='\t', index=False, header=False)
+chrNameLength_df.to_csv(snakemake.output.new_chrLength,
+                        sep='\t', index=False, header=False)
