@@ -30,9 +30,8 @@ rule download_genome:
 
 
 rule rename_files:
-    """ Rename the files with meaning names """
     input:
-        fastq = expand("data/reads/{original_name}_{pair}.fastq",
+        fastq = expand("data/reads/{original_name}_R{pair}_001.fastq",
                        original_name=original_name, pair=[1, 2])
     output:
         new_name = expand("data/reads/{id}_{pair}.fastq",
@@ -40,12 +39,12 @@ rule rename_files:
     run:
         for id, original in config['datasets'].items():
             for num in [1, 2]:
-                old = "data/reads/{}_{}.fastq".format(original, num)
+                old = "data/reads/{}_R{}_001.fastq".format(original, num)
                 new_ = "data/reads/{}_{}.fastq".format(id, num)
 
                 print(old)
                 print(new_)
-                os.rename(old, new_)
+                # os.rename(old, new_)
 
 
 rule trimming:

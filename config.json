@@ -1,23 +1,24 @@
 {
     "datasets_test":
     {
-        "HBR1": "hbr1",
-        "HBR2": "hbr2",
-        "HBR3": "hbr3",
-        "UHR1": "uhr1",
-        "UHR2": "uhr2",
-        "UHR3": "uhr3",
+        "sidkc1-K446X_n1": "K446X_sidkc1_n1_S4",
+        "sidkc1-K467R_n1": "K467R_sidkc1_n1_S5",
+        "mock_n1": "mp_HEK293_n1_S1",
+        "sidkc1_n1": "sidkc1_n1_S3",
+        "sidkc1-WT_n1": "WT_sidkc1_n1_S2",
     },
     "datasets":
     {
-        "LipoR1" : "18001_S7",
-        "LipoR3" : "Lipofectamine_n1_S1",
-        "LipoR4" : "Lipofectamine_n2_S4",
-        "LipoR2" : "lipo_n2_S4",
-        "NOP58R1" : "NOP58_n1_S1",
-        "NOP58R2" : "NOP58_n1_S2",
-        "NOP58R5" : "NOP58_n2_S5",
-        "NOP58R6" : "NOP58_n2_S6",
+        "sidkc1-K446X_n1": "K446X_sidkc1_n1_S4",
+        "sidkc1-K446X_n2": "K446X_sidkc1_n2_S9",
+        "sidkc1-K467R_n1": "K467R_sidkc1_n1_S5",
+        "sidkc1-K467R_n2": "K467R_sidkc1_n2_S10",
+        "mock_n1": "mp_HEK293_n1_S1",
+        "mock_n2": "mp_HEK293_n2_S6",
+        "sidkc1_n1": "sidkc1_n1_S3",
+        "sidkc1_n2": "sidkc1_n2_S8",
+        "sidkc1-WT_n1": "WT_sidkc1_n1_S2",
+        "sidkc1-WT_n2": "WT_sidkc1_n2_S7",
     },
     "download":
     {
