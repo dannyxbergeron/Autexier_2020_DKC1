@@ -44,7 +44,7 @@ rule rename_files:
 
                 print(old)
                 print(new_)
-                # os.rename(old, new_)
+                os.rename(old, new_)
 
 
 rule trimming:

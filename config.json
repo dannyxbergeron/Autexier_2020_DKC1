@@ -5,7 +5,7 @@
         "sidkc1-K467R_n1": "K467R_sidkc1_n1_S5",
         "mock_n1": "mp_HEK293_n1_S1",
         "sidkc1_n1": "sidkc1_n1_S3",
-        "sidkc1-WT_n1": "WT_sidkc1_n1_S2",
+        "sidkc1-WT_n1": "WT_sidkc1_n1_S2"
     },
     "datasets":
     {
@@ -18,7 +18,7 @@
         "sidkc1_n1": "sidkc1_n1_S3",
         "sidkc1_n2": "sidkc1_n2_S8",
         "sidkc1-WT_n1": "WT_sidkc1_n1_S2",
-        "sidkc1-WT_n2": "WT_sidkc1_n2_S7",
+        "sidkc1-WT_n2": "WT_sidkc1_n2_S7"
     },
     "download":
     {

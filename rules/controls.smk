@@ -55,7 +55,7 @@ rule star_alignReads_spike_in:
     threads:
         32
     conda:
-        "../envs/star.yaml"
+        "../envs/star261.yaml"
     shell:
         "STAR --runMode alignReads "
         "--genomeDir {params.index} "

@@ -29,10 +29,10 @@
     "star_alignReads":
     {
         "cpus-per-task": "32",
-        "mem": "128G",
-        "time": "0-3:00:00"
+        "mem": "64G",
+        "time": "0-1:00:00"
     },
-    "coco_cb":
+    "coco_correct_bedgraph":
     {
         "cpus-per-task": "16",
         "mem": "32G",
@@ -43,15 +43,21 @@
         "mem": "8G",
         "time": "0-5:00:00"
     },
-    "coco_cc":
+    "coco_correct_count":
     {
         "cpus-per-task": "16",
         "time": "0-8:00:00",
-        "mem": "16G"
+        "mem": "32G"
     },
     "picard":
     {
         "time": "0-8:00:00",
         "mem": "32G"
     },
+    "star_alignReads_spike_in":
+    {
+        "cpus-per-task": "32",
+        "mem": "64G",
+        "time": "0-1:00:00"
+    }
 }
