@@ -7,15 +7,8 @@ simple_id = list(config['datasets'].keys())
 
 rule all:
     input:
-        fq1_out = expand("data/qc/{id}_1_fastqc.html",
-                         id=simple_id),
-        merged = "results/coco/merged/tpm.tsv",
-        bw = expand("results/coco/bigwig/{id}.bw",
-                    id=simple_id),
-        merged_picard = "results/picard/picard_sumup.csv",
-        merged_star = "results/STAR/star_sumup.csv",
-        samtools_idx = expand("results/samtools_idxstats/{id}_idxstat.tsv",
-                              id=simple_id)
+        report = expand("results/Kraken2/{id}/results.report",
+                            id=simple_id)
 
 
 rule download_genome:
@@ -173,7 +166,10 @@ rule star_alignReads:
 include: "rules/coco.smk"
 
 # include quality controls
-include: "rules/controls.smk"
+# include: "rules/controls.smk"
+
+# inclue Kraken2
+include: "rules/kraken.smk"
 
 # include DESeq
 # include: "rules/DESeq2.smk"

@@ -59,5 +59,29 @@
         "cpus-per-task": "32",
         "mem": "64G",
         "time": "0-1:00:00"
+    },
+    "getKrakenTaxo":
+    {
+        "cpus-per-task": "32",
+        "mem": "92G",
+        "time": "0-08:00:00"
+    },
+    "getKrakenDB":
+    {
+        "cpus-per-task": "32",
+        "mem": "92G",
+    	"time": "0-08:00:00"
+    },
+    "buildKraken":
+    {
+        "cpus-per-task": "32",
+        "mem": "502G",
+        "time": "0-08:00:00"
+    },
+    "runningKraken":
+    {
+        "cpus-per-task": "32",
+        "mem": "92G",
+    	"time": "0-01:30:00"
     }
 }

@@ -47,5 +47,13 @@
         "star_index" : "data/references/star_index/",
         "chrNameLength" : "data/references/star_index/chrNameLength.txt",
         "star_index_spike_in" : "/home/berd2710/projects/def-scottmic/scottmic_group/annotation_and_sequence/genome/STAR_index_hg38_87_wo_dup_v2_ERCC"
+    },
+    "data":
+    {
+      "kraken_species":
+      [
+        "archaea", "bacteria", "viral", "plasmid",
+        "human", "fungi", "protozoa", "UniVec_Core"
+      ]
     }
 }

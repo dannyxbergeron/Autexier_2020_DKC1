@@ -4,7 +4,7 @@ rule picard:
         bam = "results/STAR/{id}/Aligned.sortedByCoord.out.bam"
     output:
         metrics = "results/picard/{id}/picard_insert_size_metrics.txt",
-        histogram = "results/picard/{id}/picard_size_histogram.pdf"
+        histogram = "results/picard/{id}/{id}_picard_size_histogram.pdf"
     conda:
         "../envs/picard.yaml"
     shell:
@@ -12,6 +12,22 @@ rule picard:
         "I={input.bam} "
         "O={output.metrics} "
         "H={output.histogram}"
+
+
+rule picard_graph:
+    """ Graph the Picard sizes for each samples **NO NEED** already generated !! """
+    input:
+        metrics = expand("results/picard/{id}/picard_insert_size_metrics.txt",
+                            id=simple_id)
+    output:
+        graphs = expand("results/picard/{id}/{id}.png",
+                        id=simple_id)
+    params:
+        samples = simple_id
+    conda:
+        "../envs/python.yaml"
+    script:
+        "../scripts/picard_histogram.py" #TODO
 
 
 rule picard_sumup:
@@ -86,3 +102,41 @@ rule idxstats:
     shell:
         "samtools index {input.bam_spike} && "
         "samtools idxstats {input.bam_spike} > {output.samtools_idx}"
+
+
+rule merge_idxstats:
+    """ Merge the idxstats from all the samples to one file """
+    input:
+        samtools_idx = expand("results/samtools_idxstats/{id}_idxstat.tsv",
+                           id=simple_id)
+    output:
+        merged = "results/samtools_idxstats/merged_idxstat.tsv"
+    conda:
+        "../envs/python.yaml"
+    script:
+        "../scripts/idxstats_merge.py"
+
+
+rule check_ribosomal_rna:
+    """ Calculates the % of rRNA reads by looking at the tpms """
+    input:
+        merged_tpm = "results/coco/merged/tpm.tsv",
+        ribosomal_genes = "data/ribo_genes.txt"
+    output:
+        rRNA_values = "results/coco/merged/rRNA_tpm_percent.tsv"
+    conda:
+        "../envs/python.yaml"
+    script:
+        "../scripts/check_ribosomal_rna.py"
+
+
+rule PCA:
+    """ Check the clustering of the cells """
+    input:
+        merged_tpm = "results/coco/merged/tpm.tsv"
+    output:
+        tok = "tok/PCA.tok"
+    conda:
+        "../envs/python_sklearn.yaml"
+    script:
+        "../scripts/PCA.py"
