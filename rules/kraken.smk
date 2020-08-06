@@ -57,6 +57,7 @@ rule buildKraken:
 
 rule runningKraken:
     input:
+        tok = "data/KrakenDB.tkn",
         fq1 = "data/trimmed/{id}_1.fastq.gz",
         fq2 = "data/trimmed/{id}_2.fastq.gz",
         db = "data/KrakenDB/"
