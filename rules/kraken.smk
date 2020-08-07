@@ -4,7 +4,7 @@ rule getKrakenTaxo:
     conda:
         "../envs/kraken2.yaml"
     threads:
-        32
+        16
     log:
         "logs/Kraken2/getKrakenTaxo.log"
     shell:
@@ -22,7 +22,7 @@ rule getKrakenDB:
     conda:
         "../envs/kraken2.yaml"
     threads:
-        32
+        16
     log:
         "logs/Kraken2/getKrakenDB_{species}.log"
     shell:
