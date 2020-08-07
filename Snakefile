@@ -7,8 +7,7 @@ simple_id = list(config['datasets'].keys())
 
 rule all:
     input:
-        report = expand("results/Kraken2/{id}/results.report",
-                            id=simple_id)
+        tok = "logs/DESeq2/add_gene_name.tok"
 
 
 rule download_genome:
@@ -163,13 +162,13 @@ rule star_alignReads:
         "&> {log}"
 
 # include coco
-include: "rules/coco.smk"
+# include: "rules/coco.smk"
 
 # include quality controls
 # include: "rules/controls.smk"
 
 # inclue Kraken2
-include: "rules/kraken.smk"
+# include: "rules/kraken.smk"
 
 # include DESeq
-# include: "rules/DESeq2.smk"
+include: "rules/DESeq2.smk"

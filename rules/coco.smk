@@ -36,6 +36,7 @@ rule coco_merge:
     input:
         tpm_files = expand("results/coco/{id}.tsv", id=simple_id)
     output:
+        counts = 'results/coco/merged/counts.tsv',
         merged = "results/coco/merged/tpm.tsv"
     conda:
         "../envs/python.yaml"
