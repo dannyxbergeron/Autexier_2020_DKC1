@@ -7,7 +7,8 @@ simple_id = list(config['datasets'].keys())
 
 rule all:
     input:
-        tok = "logs/DESeq2/add_gene_name.tok"
+        counts = 'results/coco/merged/counts.tsv',
+        # tok = "logs/DESeq2/add_gene_name.tok"
 
 
 rule download_genome:
@@ -162,7 +163,7 @@ rule star_alignReads:
         "&> {log}"
 
 # include coco
-# include: "rules/coco.smk"
+include: "rules/coco.smk"
 
 # include quality controls
 # include: "rules/controls.smk"
@@ -171,4 +172,4 @@ rule star_alignReads:
 # include: "rules/kraken.smk"
 
 # include DESeq
-include: "rules/DESeq2.smk"
+# include: "rules/DESeq2.smk"
